@@ -25,3 +25,8 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+textarea:focus {
+  border: none;
+  outline: none;
+}
