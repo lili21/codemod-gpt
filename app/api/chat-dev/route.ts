@@ -3,7 +3,7 @@ import { HttpsProxyAgent } from "https-proxy-agent";
 
 const agent = new HttpsProxyAgent("http://localhost:8001");
 
-export const openai = new OpenAI({
+const openai = new OpenAI({
   apiKey: process.env["OPENAI_API_KEY"],
   httpAgent: agent,
 });
