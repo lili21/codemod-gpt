@@ -6,12 +6,10 @@ export const openai = new OpenAI({
 
 export const runtime = 'edge'
 
-export const config = {
-  unstable_allowDynamic: [
-    // This is currently required because `qs` uses `side-channel` which depends on this.
-    '/node_modules/function-bind/**',
-  ],
-};
+export const unstable_allowDynamic = [
+  // This is currently required because `qs` uses `side-channel` which depends on this.
+  '/node_modules/function-bind/**',
+]
 
 export async function POST(req: Request) {
   // Extract the `prompt` from the body of the request
