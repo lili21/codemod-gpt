@@ -1,18 +1,14 @@
 import OpenAI from "openai";
+import { HttpsProxyAgent } from "https-proxy-agent";
+
+const agent = new HttpsProxyAgent("http://localhost:8001");
 
 export const openai = new OpenAI({
   apiKey: process.env["OPENAI_API_KEY"],
+  httpAgent: agent,
 });
 
-export const runtime = 'edge'
-
-export const config = {
-  runtime: 'edge',
-  unstable_allowDynamic: [
-    // This is currently required because `qs` uses `side-channel` which depends on this.
-    '/node_modules/function-bind/**',
-  ],
-};
+// export const runtime = 'edge'
 
 export async function POST(req: Request) {
   // Extract the `prompt` from the body of the request

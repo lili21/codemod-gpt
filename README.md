@@ -4,5 +4,6 @@
 
 ## TODO
 
-- [] Better Prompt
-- [] Streaming
+- [x] Better Prompt
+- [x] Streaming
+- [] output format
