@@ -7,7 +7,6 @@ export const openai = new OpenAI({
 export const runtime = 'edge'
 
 export const config = {
-  runtime: 'edge',
   unstable_allowDynamic: [
     // This is currently required because `qs` uses `side-channel` which depends on this.
     '/node_modules/function-bind/**',
