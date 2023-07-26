@@ -15,7 +15,7 @@ export function CodeEditer({ title, name, defaultCode = '' }: { name: string, ti
         name={name}
         value={code}
         onValueChange={code => setCode(code)}
-        highlight={code => highlight(code, languages.javascript)}
+        highlight={code => highlight(code, languages.javascript, 'jsx')}
         padding={10}
         style={{
           fontFamily: '"Fira code", "Fira Mono", monospace',
@@ -53,7 +53,7 @@ export function CodeViewer({ code }: { code: string }) {
       <Editor
         onValueChange={() => { }}
         value={code}
-        highlight={code => highlight(code, languages.javascript)}
+        highlight={code => highlight(code, languages.javascript, 'jsx')}
         padding={10}
         placeholder='Generated code will appear here'
         style={{
