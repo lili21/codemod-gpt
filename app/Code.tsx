@@ -53,7 +53,7 @@ export function CodeViewer({ code }: { code: string }) {
       <Editor
         onValueChange={() => { }}
         value={code}
-        highlight={code => highlight(code, languages.javascript, 'jsx')}
+        highlight={code => highlight(code, languages.javascript, 'js')}
         padding={10}
         placeholder='Generated code will appear here'
         style={{
