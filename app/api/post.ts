@@ -74,7 +74,6 @@ export default function post(openai: OpenAI) {
       ${originCode}
       to
       ${newCode}.
-      Just return the code inside markdown code block
       "
     `
 

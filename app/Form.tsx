@@ -1,7 +1,7 @@
 'use client'
 
 import { FormEventHandler, ReactNode, useState } from 'react'
-import { CodeViewer } from './Code'
+import MessageRender from './MessageRender'
 
 export default function Form({
   apiPath,
@@ -10,12 +10,11 @@ export default function Form({
   apiPath: string
   children: ReactNode
 }) {
-  const [code, setCode] = useState('')
+  const [message, setMessage] = useState('')
   const [loading, setLoading] = useState(false)
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
     const formData = new FormData(e.target as HTMLFormElement)
-    // console.log(Object.fromEntries(formData))
     const originCode = formData.get('originCode')
     const newCode = formData.get('newCode')
     if (!originCode || !newCode) {
@@ -23,15 +22,13 @@ export default function Form({
       return
     }
     try {
-      setCode('')
+      setMessage('')
       setLoading(true)
       const res = await fetch(apiPath, {
         method: 'POST',
         body: formData,
       })
       if (res.ok) {
-        // const result = await res.json();
-        // console.log(result);
         const reader = res.body?.getReader()
         const readStream = () => {
           reader?.read().then(({ done, value }) => {
@@ -40,11 +37,7 @@ export default function Form({
             } else {
               const chunk = new TextDecoder().decode(value)
               console.log('Recieved chunk:', chunk)
-              // todo - better way to show result
-              setCode(
-                (c) =>
-                  c + chunk.replace(/```\n?/, '').replace(/javascript\n?/, '')
-              )
+              setMessage((c) => c + chunk)
               readStream()
             }
           }).catch
@@ -71,7 +64,7 @@ export default function Form({
         </div>
         <div className="flex flex-1 gap-4">
           {children}
-          <CodeViewer code={code} />
+          <MessageRender>{message}</MessageRender>
         </div>
       </main>
     </form>
